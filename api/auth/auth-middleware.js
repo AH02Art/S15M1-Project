@@ -41,9 +41,17 @@ async function checkUsernameFree(request, response, next) {
     "message": "Invalid credentials"
   }
 */
-function checkUsernameExists(request, response, next) {
-  console.log("checkUsernameExists middleware");
-  next();
+async function checkUsernameExists(request, response, next) {
+  try {
+    const users = await User.findBy({ username: request.body.username });
+    if (users.length) {
+      next();
+    } else {
+      next({ status: 401, message: "Invalid credentials" });
+    }
+  } catch(error) {
+    next(error);
+  } 
 }
 
 /*
