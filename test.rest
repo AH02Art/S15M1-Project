@@ -1,0 +1,29 @@
+POST http://localhost:9000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "Alex",
+    "password": 12345678
+}
+
+####
+
+POST http://localhost:9000/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "Alex",
+    "password": 12345678
+}
+
+####
+
+GET http://localhost:9000/api/auth/logout
+
+####
+
+GET http://localhost:9000/api/users
+
+####
+
+GET http://localhost:9000/
