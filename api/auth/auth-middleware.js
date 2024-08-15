@@ -1,3 +1,4 @@
+const User = require("../users/users-model.js");
 /*
   If the user does not have a session saved in the server
 
@@ -19,9 +20,17 @@ function restricted(request, response, next) {
     "message": "Username taken"
   }
 */
-function checkUsernameFree(request, response, next) {
-  console.log("checkUsernameFree middleware");
-  next();
+async function checkUsernameFree(request, response, next) {
+  try {
+    const users = await User.findBy({ username: request.body.username });
+    if (!users.length) {
+      next();
+    } else {
+      next({ status: 422, message: "Username taken" });
+    }
+  } catch(error) {
+    next(error);
+  } 
 }
 
 /*
