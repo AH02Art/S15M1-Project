@@ -63,7 +63,15 @@ router.post(
   }
  */
 router.post("/login", checkUsernameExists, function(request, response, next) {
-  response.json("login");
+  const { password } = request.body;
+  if (bcrypt.compareSync(password, request.user.password)) {
+    // making it so that the cookie is set on the client
+    // making it so server stores a session with a session id
+    request.session.user = request.user;
+    response.json({ message: `Welcome ${request.user.username}!` })
+  } else {
+    next({ status: 401, message: "Invalid credentials" });
+  }
 })
 
 /**
