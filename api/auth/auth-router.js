@@ -91,9 +91,15 @@ router.post("/login", checkUsernameExists, function(request, response, next) {
  */
 router.get("/logout", function(request, response, next) {
   if (request.session.user) {
-    
+    request.session.destroy(function(error) {
+      if (error) {
+        next(error);
+      } else {
+        response.json({ status: 200, message: "logged out" });
+      }
+    })
   } else {
-    response.json({ message: "no session" })
+    response.json({ status: 200, message: "no session" });
   }
 })
 
