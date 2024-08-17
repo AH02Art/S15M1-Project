@@ -7,7 +7,8 @@
     "test": "cross-env NODE_ENV=testing jest --verbose --runInBand",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
-    "seed": "knex seed:run"
+    "seed": "knex seed:run",
+    "clean": "rm package-lock.json && rm -rf node_modules && npm install"
   },
   "devDependencies": {
     "@types/jest": "^27.5.0",
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "connect-session-knex": "^3.0.1",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "express-session": "^1.18.0",
