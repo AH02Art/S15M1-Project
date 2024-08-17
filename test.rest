@@ -23,6 +23,8 @@ GET http://localhost:9000/api/auth/logout
 ####
 
 GET http://localhost:9000/api/users
+# Cookie: chocolatechip= 
+# this was suppose to delete the cookie, but it didn't work so I just tested it in Postman
 
 ####
 
